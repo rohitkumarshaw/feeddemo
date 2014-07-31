@@ -5,7 +5,7 @@ class RssFeed < ActiveRecord::Base
 
   def self.update_from_feed(feed_url)
     feed = Feedjira::Feed.fetch_and_parse(feed_url)
-    add_entries(feed.entries)
+    add_entries(feed.entries) if feed && feed.entries
   end
 
   def self.update_from_feed_continuously(feed_url, delay_interval = 1.minutes)

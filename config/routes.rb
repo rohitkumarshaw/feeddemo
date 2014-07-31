@@ -12,6 +12,11 @@ Feeddemo::Application.routes.draw do
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
 
+  match '/feed_url' => 'rss_feeds#feed_url', :as => :feed_url
+  match '/create_feed_url' => 'rss_feeds#create_feed_url', :as => :create_feed_url
+  
+  
+  
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
@@ -54,7 +59,7 @@ Feeddemo::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-   root :to => 'rss_feeds#index'
+  root :to => 'rss_feeds#index'
 
   # See how all your routes lay out with "rake routes"
 

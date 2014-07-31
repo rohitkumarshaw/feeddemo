@@ -1,0 +1,33 @@
+
+<%= form_tag create_feed_url_path do %>
+  <table>
+    <tr>
+      <td>Add Feed Url</td>
+      <td><input type="text" name="rss_feed_url[url]" /></td>
+      <td><input type="submit" value="Add Url" /></td>
+    </tr>
+  </table>
+<% end %>
+
+
+
+
+
+<table class="table table-striped">
+  <thead>
+  <th>URL</th>
+  <th>Action</th>
+</thead>
+
+<tbody>
+  <% @rss_feed_urls.each do |rss_feed|%>
+    <tr>
+      <td>
+        <%= link_to "#{rss_feed.name}", "#{rss_feed.url}",:target => "_blank" %>
+      </td>
+      <td><%= link_to 'Edit', edit_rss_feed_path(rss_feed) %></td>
+      <td><%= link_to 'Destroy', rss_feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end if @rss_feed_urls %>
+</tbody>
+</table>

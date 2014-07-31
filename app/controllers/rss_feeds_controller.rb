@@ -6,7 +6,13 @@ class RssFeedsController < ApplicationController
   require 'feedjira'
 
   def index
-    feed = RssFeed.update_from_feed("http://news.google.com/?output=rss")
+    
+    if !params[:feed_url].blank?
+      feed = RssFeed.update_from_feed("#{params[:feed_url]}")
+    else
+      feed = RssFeed.update_from_feed("http://news.google.com/?output=rss")
+    end    
+    
     @rss_feeds = RssFeed.order('published_at ASC')
 
     respond_to do |format|
@@ -65,4 +71,28 @@ class RssFeedsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  
+  def feed_url   
+    @rss_feed_urls = RssFeedUrl.all
+  end
+  
+  def create_feed_url
+    @rss_feed_url = RssFeedUrl.new(params[:rss_feed_url])
+   
+    
+    respond_to do |format|
+      if @rss_feed_url.save
+        format.html { redirect_to feed_url_path, notice: 'Rss feed URL was successfully created.' }
+        format.json { render json: @rss_feed_urls, status: :created, location: @rss_feed_urls }
+      else
+        format.html { render action: "feed_url" }
+        format.json { render json: @rss_feed_urls.errors, status: :unprocessable_entity }
+      end
+    end
+    
+    
+  end
+  
+  
 end
