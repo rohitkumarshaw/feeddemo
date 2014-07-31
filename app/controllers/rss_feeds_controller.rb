@@ -75,12 +75,13 @@ class RssFeedsController < ApplicationController
   
   def feed_url   
     @rss_feed_urls = RssFeedUrl.all
+
   end
   
   def create_feed_url
     @rss_feed_url = RssFeedUrl.new(params[:rss_feed_url])
    
-    
+    logger.info "sssssssssssssssssssss #{params[:rss_feed_url].inspect}"
     respond_to do |format|
       if @rss_feed_url.save
         format.html { redirect_to feed_url_path, notice: 'Rss feed URL was successfully created.' }
@@ -93,6 +94,19 @@ class RssFeedsController < ApplicationController
     
     
   end
-  
+
+
+
+  def del_feed_url
+    @rss_feed_url = RssFeedUrl.find(params[:id])
+
+    if @rss_feed_url.destroy
+      respond_to do |format|
+        format.html { redirect_to feed_url_path, notice: 'Rss url is removed' }
+        format.json { head :no_content }
+      end
+    end
+
+  end
   
 end

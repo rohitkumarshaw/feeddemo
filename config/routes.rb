@@ -14,6 +14,7 @@ Feeddemo::Application.routes.draw do
 
   match '/feed_url' => 'rss_feeds#feed_url', :as => :feed_url
   match '/create_feed_url' => 'rss_feeds#create_feed_url', :as => :create_feed_url
+  match '/del_feed_url' => 'rss_feeds#del_feed_url', :as => :del_feed_url
   
   
   
@@ -59,7 +60,7 @@ Feeddemo::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'rss_feeds#index'
+  root :to => 'rss_feeds#feed_url'
 
   # See how all your routes lay out with "rake routes"
 

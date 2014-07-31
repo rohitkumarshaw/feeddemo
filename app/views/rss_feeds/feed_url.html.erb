@@ -20,14 +20,16 @@
 </thead>
 
 <tbody>
-  <% @rss_feed_urls.each do |rss_feed|%>
+<% rss_feeds = RssFeedUrl.all  %>
+  <% rss_feeds.each do |rss_feed| %>
     <tr>
       <td>
-        <%= link_to "#{rss_feed.name}", "#{rss_feed.url}",:target => "_blank" %>
+        <%= link_to  "#{rss_feed.url}", :controller => 'rss_feeds' , :action => 'index' , :feed_url => rss_feed.url %>
       </td>
-      <td><%= link_to 'Edit', edit_rss_feed_path(rss_feed) %></td>
-      <td><%= link_to 'Destroy', rss_feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Edit' %></td>
+      <td><%= link_to 'Destroy', :controller => 'rss_feeds', :action => 'del_feed_url', :id => rss_feed.id %></td>
+
     </tr>
-  <% end if @rss_feed_urls %>
+  <% end if rss_feeds %>
 </tbody>
 </table>
