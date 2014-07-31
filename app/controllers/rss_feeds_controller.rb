@@ -23,6 +23,7 @@ class RssFeedsController < ApplicationController
 
   # POST /rss_feeds
   # POST /rss_feeds.json
+  
   def create
     @rss_feed = RssFeed.new(params[:rss_feed])
 
