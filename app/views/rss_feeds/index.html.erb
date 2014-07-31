@@ -1,0 +1,20 @@
+<table class="table table-striped">
+  <thead>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Action</th>
+  </thead>
+
+  <tbody>
+  <% @rss_feeds.each do |rss_feed|%>
+      <tr>
+        <td><%= rss_feed.id %></td>
+        <td>
+          <%= link_to "#{rss_feed.name}", "#{rss_feed.url}",:target => "_blank" %>
+        </td>
+        <td><%= link_to 'Edit', edit_rss_feed_path(rss_feed) %></td>
+        <td><%= link_to 'Destroy', rss_feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
